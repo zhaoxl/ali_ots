@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Backkom"]
   s.email       = '99866770@qq.com'
   s.files       = ["lib/ali_ots.rb"]
-  s.homepage    = 'http://rubygems.org/gems/ali_ots'
+  s.homepage    = 'https://github.com/zhaoxl/ali_ots'
   s.license     = 'MIT'
   s.files       = Dir["{lib}/**/*"]
   s.require_paths = ["lib"]

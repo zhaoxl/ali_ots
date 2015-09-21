@@ -19,7 +19,7 @@ module AliOts
       self.conn.request("CreateTable", request_meta)
     end
     
-    # 删除
+    # 删除表
     # example:
     #   client.delete_table("myTable")
     def delete_table(table_name)
@@ -41,7 +41,6 @@ module AliOts
     
     # 更新表
     # example:
-    #   schema_of_primary_keys = [AliOts::Metas::ColumnSchema.new(name: 'id', type: AliOts::Metas::Enums::ColumnType::INTEGER)]
     #
     #   client.update_table("myTable", 9, 9)
     def update_table(table_name, capacity_read, capacity_write)
@@ -84,7 +83,7 @@ module AliOts
       return status, body, response_status
     end
     
-    # 根据给定的主键读取单行数据。
+    # 根据给定的主键读取单行数据
     # example:
     #   primary_keys = [AliOts::Metas::Column.new(name: "id", value: AliOts::Metas::ColumnValue.new(type: AliOts::Metas::Enums::ColumnType::INTEGER, v_int: 1))]
     #   columns = ["user_name", "age"]
@@ -98,7 +97,7 @@ module AliOts
       return status, body, response_status
     end
     
-    # 更新指定行的数据，如果该行不存在，则新增一行；若该行存在，则根据请求的内容在这一行中新增、修改或者删除指定列的值。
+    # 更新指定行的数据，如果该行不存在，则新增一行；若该行存在，则根据请求的内容在这一行中新增、修改或者删除指定列的值
     # example:
     #   condition_type = AliOts::Metas::Enums::RowExistenceExpectation::IGNORE
     #   primary_keys = [AliOts::Metas::Column.new(name: "id", value: AliOts::Metas::ColumnValue.new(type: AliOts::Metas::Enums::ColumnType::INTEGER, v_int: 1))]
@@ -154,6 +153,7 @@ module AliOts
     #   rows = [row]
     #   table1 = AliOts::Metas::TableInBatchGetRowRequest.new(table_name: "myTable", rows: rows, columns_to_get: ['name', 'age'])
     #   tables = [table1]
+    #
     #   client.batch_get_row(tables)
     def batch_get_row(tables)
       request_meta = AliOts::Metas::BatchGetRowRequest.new(tables: tables)
@@ -163,7 +163,7 @@ module AliOts
       return status, body, response_status
     end
     
-    # 批量插入，修改或删除一个或多个表中的若干行数据。
+    # 批量插入，修改或删除一个或多个表中的若干行数据
     # example:
     #   condition = AliOts::Metas::Condition.new(row_existence: AliOts::Metas::Enums::RowExistenceExpectation::EXPECT_NOT_EXIST)
     #   primary_keys = [AliOts::Metas::Column.new(name: "id", value: AliOts::Metas::ColumnValue.new(type: AliOts::Metas::Enums::ColumnType::INTEGER, v_int: 100))]
@@ -171,6 +171,7 @@ module AliOts
     #   row1 = AliOts::Metas::PutRowInBatchWriteRowRequest.new(condition: condition, primary_key: primary_keys, attribute_columns: columns)
     #   rows = [row1]
     #   tables = [AliOts::Metas::TableInBatchWriteRowRequest.new(table_name: 'myTable', put_rows: rows)]
+    #
     #   client.batch_write_row(tables)
     def batch_write_row(tables)
       request_meta = AliOts::Metas::BatchWriteRowRequest.new(tables: tables)
