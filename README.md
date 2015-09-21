@@ -8,8 +8,8 @@
 
 ## Configuration
 
-    #/config/initializers/ali_ots_config.rb
 ```ruby
+#/config/initializers/ali_ots_config.rb
 
 AliOts.configure do |config|
   config[:DEBUG_LEVEL] = ::Logger::DEBUG
