@@ -19,6 +19,7 @@ AliOts.configure do |config|
   config[:INSTANCE_NAME] = "test"
   config[:APIVERSION] = "2014-08-08"
 end
+```
 
 ## Usage
 
