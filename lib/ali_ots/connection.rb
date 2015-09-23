@@ -18,7 +18,7 @@ module AliOts
       self.logger.info body.to_json
       
       headers ||= {}
-      url = AliOts::END_POSITION + "/" + action
+      url = AliOts::CONFIG[:END_POSITION] + "/" + action
       serialize_body = body.serialize_to_string
       ots_headers = make_headers(url, serialize_body)
       headers.merge!(ots_headers)
@@ -97,17 +97,17 @@ module AliOts
         'x-ots-date', 
         'x-ots-contenttype',
       ]
-      raise AliOts::Exceptions::ResponseException.new("Missing Parameter: #{(header_names-headers.symbolize_keys.keys).join(", ")}") unless header_names == header_names&&headers.symbolize_keys.keys
+      self.logger.error("Missing Parameter: #{(header_names-headers.symbolize_keys.keys).join(", ")}") unless header_names == header_names&&headers.symbolize_keys.keys
       
       # 2, check md5
       md5 = Base64.encode64(Digest::MD5.digest(body)).gsub("\n", "")
-      raise AliOts::Exceptions::ResponseException.new("MD5 mismatch in response") unless md5 == headers['x-ots-contentmd5']
+      self.logger.error("MD5 mismatch in response") unless md5 == headers['x-ots-contentmd5']
 
       # 3, check date 
-      raise AliOts::Exceptions::ResponseException.new("Invalid date format in response") unless server_time = (Time.parse(headers['x-ots-date']) rescue nil)
+      self.logger.error("Invalid date format in response") unless server_time = (Time.parse(headers['x-ots-date']) rescue nil)
       
       # 4, check date range
-      raise AliOts::Exceptions::ResponseException.new("The difference between date in response and system time is more than 15 minutes") unless (Time.now - server_time).abs < 15.minute
+      self.logger.error("The difference between date in response and system time is more than 15 minutes") unless (Time.now - server_time).abs < 15.minute
     end
   end
 end

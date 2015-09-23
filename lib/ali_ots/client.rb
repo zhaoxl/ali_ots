@@ -137,8 +137,8 @@ module AliOts
     #   inclusive_start_primary_keys = [AliOts::Metas::Column.new(name: "id", value: AliOts::Metas::ColumnValue.new(type: AliOts::Metas::Enums::ColumnType::INTEGER, v_int: 1))]
     #   exclusive_end_primary_keys = [AliOts::Metas::Column.new(name: "id", value: AliOts::Metas::ColumnValue.new(type: AliOts::Metas::Enums::ColumnType::INTEGER, v_int: 999))]
     #
-    #   client.get_range("myTable", direction, inclusive_start_primary_keys, exclusive_end_primary_keys)
-    def get_range(table_name, inclusive_start_primary_keys, exclusive_end_primary_keys, direction = AliOts::Metas::Enums::Direction::FORWARD, columns = [], limit = nil)
+    #   client.get_range("myTable", inclusive_start_primary_keys, exclusive_end_primary_keys, 10, [], direction)
+    def get_range(table_name, inclusive_start_primary_keys, exclusive_end_primary_keys, limit = nil, columns = [], direction = AliOts::Metas::Enums::Direction::FORWARD)
       request_meta = AliOts::Metas::GetRangeRequest.new(table_name: table_name, direction: direction, inclusive_start_primary_key: inclusive_start_primary_keys, exclusive_end_primary_key: exclusive_end_primary_keys, columns_to_get: columns, limit: limit)
       
       status, body, response_status = self.conn.request("GetRange", request_meta)

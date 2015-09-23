@@ -4,6 +4,7 @@ module AliOts
       #表示一列的数据类型，枚举类型。
       #INF_MIN和INF_MAX为GetRange操作专用类型，value的type为INF_MIN的Column为小于其它所有Column，value的type为INF_MAX的Column大于其它所有Column。
       class ColumnType < ::Protobuf::Enum
+        set_option :allow_alias
         define :INF_MIN, 0
         define :INF_MAX, 1
         define :INTEGER, 2
